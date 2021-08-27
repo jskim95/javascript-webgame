@@ -1,0 +1,69 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .ball {
+            display: inline-block;
+            border: 1px solid black;
+            border-radius: 20px;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 20px;
+            text-align: center;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="result">로또 번호 : </div>
+    <div id="bonus">보너스 : </div>
+</body>
+<script>
+    let number = Array(45);
+    let shuffle = [];
+    const $result = document.querySelector('#result');
+    const $bonus = document.querySelector('#bonus');
+
+    // 1~45번 공 만드는 반복문
+    for (let i = 0; i < number.length; i++) {
+        number[i] = i + 1;
+    }
+
+    // 랜덤 숫자 만드는 반복문
+    for (let j = number.length; j > 0; j--) {
+        let index = Math.floor(number.length * Math.random());
+        let value = number.splice(index, 1);
+        shuffle.push(value[0])
+    }
+
+    // 6개 공 오름차순 정렬후 변수에 저장 및 보너스볼 
+    let mainBall = shuffle.slice(0, 6).sort(function(a, b) {
+        return a - b;
+    });
+    let bonusBall = shuffle[6];
+
+    // 1초마다 공보여주는 함수
+    function showBall(number, $parent) {
+        const $ball = document.createElement('div');
+        $ball.className = 'ball';
+        $ball.textContent = number;
+        $parent.appendChild($ball);
+    }
+    for (let i = 0; i < mainBall.length; i++) {
+        setTimeout(() => {
+            showBall(mainBall[i], $result);
+        }, (i + 1) * 1000);
+    }
+    setTimeout(() => {
+        showBall(bonusBall, $bonus);
+    }, 7000);
+    console.log(mainBall, bonusBall);
+</script>
+
+</html>
