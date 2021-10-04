@@ -37,6 +37,7 @@
     const $result = document.querySelector('#result');
     let startTime;
     let endTime;
+    const records = [];
     $screen.addEventListener('click', (event) => {
         // screen 클릭시 해당 클래스에서 실행해야되는 내용 조건문 이용해서 작성하기
 
@@ -66,15 +67,29 @@
             // if ready - 빨강, (class) ready -> now, 
 
         } else if (event.target.className === 'now') {
+
             // 1. 끝 시간 재기
-            // 2. class now -> waiting 으로 변경
-            // 3. textContent : 클릭해서 시작하세요로 바꾸기
-            // 2. 시간 차이 저장하기
             endTime = new Date();
-            $result.textContent = `${endTime - startTime}ms`;
+
+            // 2. class now -> waiting 으로 변경
             $screen.classList.remove('now');
             $screen.classList.add('waiting');
+
+            // 3. textContent : 클릭해서 시작하세요로 바꾸기
             $screen.textContent = '클릭해서 시작하세요';
+
+            // 4. 시간 차이 저장하기
+            const current = endTime - startTime;
+
+            // 5. records 배열에 반응속도 추가하기
+            records.push(current);
+
+            // 6. 평균속도 average 변수에 할당하기
+            const average = records.reduce((a, c) => a + c) / records.length;
+
+            $result.textContent = `${current}ms, 평균${average}`;
+            startTime = null;
+            endTime = null;
         }
 
 
