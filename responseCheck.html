@@ -38,6 +38,7 @@
     let startTime;
     let endTime;
     const records = [];
+    let timeoutId;
     $screen.addEventListener('click', (event) => {
         // screen 클릭시 해당 클래스에서 실행해야되는 내용 조건문 이용해서 작성하기
 
@@ -55,7 +56,7 @@
             $screen.classList.add('ready');
             event.target.textContent = '초록색이 되면 클릭해주세요';
             console.log(Math.random() * 2 * 1000);
-            setTimeout(() => {
+            timeoutId = setTimeout(() => {
                 startTime = new Date();
                 $screen.classList.remove('ready');
                 $screen.classList.add('now');
@@ -65,7 +66,10 @@
 
         } else if (event.target.className === 'ready') {
             // if ready - 빨강, (class) ready -> now, 
-
+            clearTimeout(timeoutId);
+            $screen.classList.remove('ready');
+            $screen.classList.add('waiting');
+            event.target.textContent = '너무 빨리 클릭하셨습니다.'
         } else if (event.target.className === 'now') {
 
             // 1. 끝 시간 재기
