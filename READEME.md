@@ -60,4 +60,6 @@ console.log(c); // [1,2,3,4];
 // {0: '철수', 1: '영희', 2: '진구', 3: '종국'}
 
 ```
-
+## 구조분해 할당
+- 배열
+- const { body, createElement } = document;

@@ -21,13 +21,17 @@
 
 <body>
     <script>
-        let turn = 'O';
         const $table = document.createElement('table');
+        const $result = document.createElement('div');
+        const rows = [];
+        let turn = 'O';
+
         for (let i = 0; i < 3; i++) {
             const $tr = document.createElement('tr');
-            for (let i = 0; i < 3; i++) {
+            const cells = [];
+            for (let j = 0; j < 3; j++) {
                 const $td = document.createElement('td');
-                $tr.appendChild($td);
+                cells.push($td);
                 $td.addEventListener('click', () => {
                     if (event.target.textContent) return;
                     // $td.textContent = turn;
@@ -38,10 +42,13 @@
                         turn = 'O';
                     }
                 })
+                $tr.append($td);
             }
+            rows.push(cells);
             $table.append($tr);
         }
         document.body.append($table);
+        document.body.append($result);
     </script>
 </body>
 
