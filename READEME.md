@@ -61,5 +61,5 @@ console.log(c); // [1,2,3,4];
 
 ```
 ## 구조분해 할당
-- 배열
+- 배열, 객체리터럴 
 - const { body, createElement } = document;
