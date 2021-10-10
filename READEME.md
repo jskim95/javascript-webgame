@@ -63,3 +63,8 @@ console.log(c); // [1,2,3,4];
 ## 구조분해 할당
 - 배열, 객체리터럴 
 - const { body, createElement } = document;
+
+## 이벤트 버블링
+https://joshua1988.github.io/web-development/javascript/event-propagation-delegation/#%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%B2%84%EB%B8%94%EB%A7%81---event-bubbling
+
+## event.target vs event.currentTarget

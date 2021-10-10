@@ -45,18 +45,19 @@
             // 2번 방법
             // turn = turn === 'O' ? 'X' : 'O'; 
         }
+
         for (let i = 0; i < 3; i++) {
             const $tr = document.createElement('tr');
             const cells = [];
             for (let j = 0; j < 3; j++) {
                 const $td = document.createElement('td');
                 cells.push($td);
-                $td.addEventListener('click', callback);
                 $tr.append($td);
             }
             rows.push(cells);
             $table.append($tr);
         }
+        $table.addEventListener('click', callback); // 이벤트 버블링
         document.body.append($table);
         document.body.append($result);
     </script>
