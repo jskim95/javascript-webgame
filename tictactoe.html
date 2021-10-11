@@ -25,14 +25,84 @@
         const $result = document.createElement('div');
         const rows = [];
         let turn = 'O';
+        // [
+        //   [td, td, td],
+        //   [td, td, td],
+        //   [td, td, td],
+        // ]
+        const checkWinner = (target) => {
+            let rowIndex;
+            let cellIndex;
+            rows.forEach((row, ri) => {
+                row.forEach((cell, ci) => {
+                    if (cell === target) {
+                        rowIndex = ri;
+                        cellIndex = ci;
+                    }
+                });
+            });
+            let hasWinner = false;
+            if (
+                rows[rowIndex][0].textContent === turn &&
+                rows[rowIndex][1].textContent === turn &&
+                rows[rowIndex][2].textContent === turn
+            ) {
+                hasWinner = true;
+            }
+
+            if (
+                rows[0][cellIndex].textContent === turn &&
+                rows[1][cellIndex].textContent === turn &&
+                rows[2][cellIndex].textContent === turn
+            ) {
+                hasWinner = true;
+            }
+
+            if (
+                rows[0][0].textContent === turn &&
+                rows[1][1].textContent === turn &&
+                rows[2][2].textContent === turn
+            ) {
+                hasWinner = true;
+            }
+
+            if (
+                rows[0][2].textContent === turn &&
+                rows[1][1].textContent === turn &&
+                rows[2][0].textContent === turn
+            ) {
+                hasWinner = true;
+            }
+            return hasWinner;
+        }
 
         const callback = (event) => {
             if (event.target.textContent !== '') {
                 console.log('이미 표시했습니다.')
                 return;
             }
-            console.log(turn);
             event.target.textContent = turn;
+            // 승부 판단하기
+            if (checkWinner(event.target)) {
+                $result.textContent = `${turn}님이 승리하셧습니다!`;
+                $table.removeEventListener('click', callback);
+                return;
+            }
+
+            // 무승부 판단하기
+            let count = 0;
+            rows.forEach((row, ri) => {
+                row.forEach((cell, ci) => {
+                    if (cell.textContent) {
+                        count += 1;
+                    }
+                })
+            })
+            console.log(count);
+            if (count === 9) {
+                $result.textContent = '무승부 입니다.';
+                return;
+            }
 
             // 차례 바꾸기 
             // 1번 방법
@@ -57,7 +127,7 @@
             rows.push(cells);
             $table.append($tr);
         }
-        $table.addEventListener('click', callback); // 이벤트 버블링
+        $table.addEventListener('click', callback); // 이벤트 버블링(td를 클릭해도 table이 실행되기 때문에)
         document.body.append($table);
         document.body.append($result);
     </script>
