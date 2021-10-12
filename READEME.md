@@ -68,3 +68,10 @@ console.log(c); // [1,2,3,4];
 https://joshua1988.github.io/web-development/javascript/event-propagation-delegation/#%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%B2%84%EB%B8%94%EB%A7%81---event-bubbling
 
 ## event.target vs event.currentTarget
+
+## parentNode vs children
+
+## every, some, flat
+- flat 2차원 배열을 1차원 배열로 만들어줌
+- every 조건문중에서 한개라도 false가 나오면 검색을 멈추고 return false
+- some 조건문중에서 한개라도 true가 나오면 return true

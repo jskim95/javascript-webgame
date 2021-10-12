@@ -31,8 +31,9 @@
         //   [td, td, td],
         // ]
         const checkWinner = (target) => {
-            let rowIndex;
-            let cellIndex;
+            let rowIndex; // let rowIndex = target.parentNode.rowIndex;
+            let cellIndex; // let cellIndex = target.cellIndex;
+            console.log(target.cellIndex);
             rows.forEach((row, ri) => {
                 row.forEach((cell, ci) => {
                     if (cell === target) {
@@ -98,7 +99,6 @@
                     }
                 })
             })
-            console.log(count);
             if (count === 9) {
                 $result.textContent = '무승부 입니다.';
                 return;
